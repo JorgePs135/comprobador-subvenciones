@@ -66,9 +66,14 @@ Niveles: **error** (incumple una regla verificable), **aviso** (hay que revisarl
 Mantenimiento anual: cuando salga cada convocatoria nueva, leer las bases y actualizar `edicion`, `periodo` y las reglas que cambien.
 Añadir un test por cada regla nueva.
 
-## Pendiente (a propósito, fuera de v0)
+## Publicación
 
-- Interfaz en catalán (2 de los 4 perfiles son de Cataluña).
-- Analítica sin cookies (Cloudflare Web Analytics) y Search Console, cuando se publique.
-- Páginas de contenido por convocatoria y la "puerta falsa" del kit (lista de espera).
-- Publicación en GitHub Pages: hace falta una cuenta y un repositorio. Los pasos están en `../05_siguientes_pasos.md`.
+- Web: https://jorgeps135.github.io/comprobador-subvenciones/ (GitHub Pages, rama `main`, raíz).
+- Para publicar cambios: `node scripts/build.js`, `npm test`, commit y `git push`. Pages se actualiza en 1–2 minutos.
+- Licencia: todos los derechos reservados (ver `LICENSE`).
+
+## Pendiente
+
+- Revisión del catalán por una persona nativa.
+- Lista de espera: falta la URL del formulario (ver `../06_lista_espera.md`).
+- Bases de 2026 de Tarragona y de la Xunta.
