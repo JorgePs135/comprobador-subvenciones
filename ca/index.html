@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comprovador de justificació de subvencions per a associacions i clubs</title>
+<meta name="description" content="Revisa la relació classificada de despeses de la subvenció de la teva entitat abans de presentar-la: dates, pagaments, efectiu, indirectes, duplicats i documents que falten. Gratuït i sense enviar les teves dades.">
+<link rel="canonical" href="https://jorgeps135.github.io/comprobador-subvenciones/ca/">
+<link rel="alternate" hreflang="es" href="https://jorgeps135.github.io/comprobador-subvenciones/">
+<link rel="alternate" hreflang="ca" href="https://jorgeps135.github.io/comprobador-subvenciones/ca/">
+<link rel="alternate" hreflang="x-default" href="https://jorgeps135.github.io/comprobador-subvenciones/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ca_ES">
+<meta property="og:title" content="Comprovador de justificació de subvencions per a associacions i clubs">
+<meta property="og:description" content="Revisa la relació classificada de despeses de la subvenció de la teva entitat abans de presentar-la: dates, pagaments, efectiu, indirectes, duplicats i documents que falten. Gratuït i sense enviar les teves dades.">
+<meta property="og:url" content="https://jorgeps135.github.io/comprobador-subvenciones/ca/">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body class="operate">
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../ca/"><svg class="icon brand-mark" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 19 6v5c0 4.5-3 8.4-7 10-4-1.6-7-5.5-7-10V6l7-3Z"/><path d="m9 12 2 2 4-4"/></svg><span>Comprovador de justificació de subvencions</span></a>
+    <a class="lang" href="../" hreflang="es" lang="es" title="Versión en castellano">Castellano</a>
+  </div>
+</header>
+<main class="wrap tool" data-base="../">
+  <section class="intro">
+    <h1>Comprovador de justificació de subvencions per a associacions i clubs</h1>
+    <p class="lead">Per a associacions i clubs que justifiquen una subvenció amb <strong>compte justificatiu simplificat</strong>. Revisa la relació de despeses abans de presentar-la i descobreix què hi falta.</p>
+    <p class="privacy"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 19 6v5c0 4.5-3 8.4-7 10-4-1.6-7-5.5-7-10V6l7-3Z"/><path d="m9 12 2 2 4-4"/></svg><span>Tot es processa al teu navegador: cap dada no surt del teu ordinador.</span></p>
+  </section>
+
+  <form id="form" class="steps" novalidate>
+    <fieldset class="step">
+      <legend><span class="step-n" aria-hidden="true">1</span>Convocatòria</legend>
+      <label for="profile">Quina subvenció justifiques?</label>
+      <select id="profile" name="perfil"></select>
+      <p id="profile-info" class="note" aria-live="polite"></p>
+    </fieldset>
+
+    <fieldset class="step">
+      <legend><span class="step-n" aria-hidden="true">2</span>Dades de la concessió</legend>
+      <div class="grid">
+        <label>Subvenció concedida (€)<input id="subvencion" inputmode="decimal" autocomplete="off" placeholder="2.000,00"></label>
+        <label>Pressupost o cost total de l'activitat (€)<input id="presupuesto" inputmode="decimal" autocomplete="off" placeholder="opcional"></label>
+        <label>Altres ingressos per a l'activitat (€)<input id="otros" inputmode="decimal" autocomplete="off" placeholder="opcional"></label>
+        <label>Inici del període de despeses<input id="inicio" type="date"></label>
+        <label>Final del període de despeses<input id="fin" type="date"></label>
+        <label>Últim dia del termini de justificació<input id="finjust" type="date"></label>
+      </div>
+      <label class="check"><input id="ivadeducible" type="checkbox"><span>L'entitat <strong>dedueix l'IVA</strong>. Si no ho saps, deixa la casella sense marcar: la majoria d'associacions no el dedueixen.</span></label>
+    </fieldset>
+
+    <fieldset class="step">
+      <legend><span class="step-n" aria-hidden="true">3</span>Relació de despeses</legend>
+      <p class="hint">Puja un CSV o un Excel, o copia la taula a l'Excel i enganxa-la aquí. Columnes reconegudes (en castellà, com a la plantilla): Nº, Concepto, Tipo, Acreedor, NIF, Nº factura, Fecha emisión, Fecha pago, Medio de pago, Importe (total amb IVA), IVA, % imputado i Fuente.</p>
+      <div class="row">
+        <label class="button secondary file-button">Pujar fitxer<input id="file" type="file" accept=".csv,.txt,.xlsx,.xls"></label>
+        <button id="example" type="button" class="secondary">Carregar l'exemple</button>
+        <a class="button secondary" href="../ejemplo_relacion_gastos.csv" download>Descarregar la plantilla</a>
+        <span id="file-name" class="hint" aria-live="polite"></span>
+      </div>
+      <label class="sr-only" for="data">Relació de despeses</label>
+      <textarea id="data" rows="8" spellcheck="false" placeholder="Enganxa aquí la teva taula…"></textarea>
+      <details class="hint"><summary>Valors de la columna «Tipo»</summary><div id="types-help"></div></details>
+      <button id="run" type="submit" class="primary">Comprovar la relació</button>
+    </fieldset>
+  </form>
+
+  <section id="results" class="results" hidden aria-labelledby="results-title" tabindex="-1">
+    <h2 id="results-title">Resultat</h2>
+    <div id="summary" class="summary" role="status"></div>
+    <dl id="totals" class="totals"></dl>
+    <ol id="findings" class="findings"></ol>
+    <h3>El que has de presentar</h3>
+    <ul id="checklist" class="checklist"></ul>
+    <button id="export" type="button" class="secondary">Descarregar la relació ordenada (CSV)</button>
+    
+  </section>
+
+  <section class="guides" aria-labelledby="guides-title"><h2 id="guides-title">Guies per convocatòria</h2><ul><li><a href="../ca/guies/cuenta-justificativa-simplificada/">Com fer el compte justificatiu simplificat d'una subvenció</a></li><li><a href="../guias/ayuntamiento-madrid-subvenciones-deportivas/" hreflang="es" lang="es">Justificar la subvención deportiva del Ayuntamiento de Madrid 2025-2026</a></li><li><a href="../ca/guies/diputacio-barcelona-cultura-popular/">Justificar la subvenció de cultura popular de la Diputació de Barcelona 2026</a></li><li><a href="../ca/guies/diputacio-tarragona-activitats-culturals/">Justificar la subvenció d'activitats culturals singulars de la Diputació de Tarragona</a></li><li><a href="../guias/xunta-clubes-deportivos-pr945c/" hreflang="es" lang="es">Justificar la ayuda de la Xunta a clubes deportivos (PR945C)</a></li></ul></section>
+</main>
+<script type="module" src="../src/app.js"></script>
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Eina orientativa: comprova regles generals i les de les bases citades. <strong>No substitueix les bases de la teva convocatòria ni la revisió de l'òrgan que la concedeix</strong>, i no és assessorament jurídic ni fiscal. Si un resultat no et quadra, manen les bases.</p>
+    <p class="meta">Regles revisades el 16/10/2026. Codi a <a href="https://github.com/JorgePs135/comprobador-subvenciones">GitHub</a>.</p>
+  </div>
+</footer>
+</body>
+</html>

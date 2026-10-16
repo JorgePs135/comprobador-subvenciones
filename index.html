@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comprobador de justificación de subvenciones para asociaciones y clubes</title>
+<meta name="description" content="Revisa la relación clasificada de gastos de la subvención de tu asociación o club antes de presentarla: fechas, pagos, efectivo, indirectos, duplicados y documentos que faltan. Gratis y sin enviar tus datos.">
+<link rel="canonical" href="https://jorgeps135.github.io/comprobador-subvenciones/">
+<link rel="alternate" hreflang="es" href="https://jorgeps135.github.io/comprobador-subvenciones/">
+<link rel="alternate" hreflang="ca" href="https://jorgeps135.github.io/comprobador-subvenciones/ca/">
+<link rel="alternate" hreflang="x-default" href="https://jorgeps135.github.io/comprobador-subvenciones/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:title" content="Comprobador de justificación de subvenciones para asociaciones y clubes">
+<meta property="og:description" content="Revisa la relación clasificada de gastos de la subvención de tu asociación o club antes de presentarla: fechas, pagos, efectivo, indirectos, duplicados y documentos que faltan. Gratis y sin enviar tus datos.">
+<meta property="og:url" content="https://jorgeps135.github.io/comprobador-subvenciones/">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="operate">
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="./"><svg class="icon brand-mark" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 19 6v5c0 4.5-3 8.4-7 10-4-1.6-7-5.5-7-10V6l7-3Z"/><path d="m9 12 2 2 4-4"/></svg><span>Comprobador de justificación de subvenciones</span></a>
+    <a class="lang" href="ca/" hreflang="ca" lang="ca" title="Versió en català">Català</a>
+  </div>
+</header>
+<main class="wrap tool" data-base="">
+  <section class="intro">
+    <h1>Comprobador de justificación de subvenciones para asociaciones y clubes</h1>
+    <p class="lead">Para asociaciones y clubes que justifican una subvención con <strong>cuenta justificativa simplificada</strong>. Revisa la relación de gastos antes de presentarla y descubre lo que falta.</p>
+    <p class="privacy"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 19 6v5c0 4.5-3 8.4-7 10-4-1.6-7-5.5-7-10V6l7-3Z"/><path d="m9 12 2 2 4-4"/></svg><span>Todo se procesa en tu navegador: ningún dato sale de tu ordenador.</span></p>
+  </section>
+
+  <form id="form" class="steps" novalidate>
+    <fieldset class="step">
+      <legend><span class="step-n" aria-hidden="true">1</span>Convocatoria</legend>
+      <label for="profile">¿Qué subvención justificas?</label>
+      <select id="profile" name="perfil"></select>
+      <p id="profile-info" class="note" aria-live="polite"></p>
+    </fieldset>
+
+    <fieldset class="step">
+      <legend><span class="step-n" aria-hidden="true">2</span>Datos de la concesión</legend>
+      <div class="grid">
+        <label>Subvención concedida (€)<input id="subvencion" inputmode="decimal" autocomplete="off" placeholder="2.000,00"></label>
+        <label>Presupuesto o coste total de la actividad (€)<input id="presupuesto" inputmode="decimal" autocomplete="off" placeholder="opcional"></label>
+        <label>Otros ingresos para la actividad (€)<input id="otros" inputmode="decimal" autocomplete="off" placeholder="opcional"></label>
+        <label>Inicio del periodo de gastos<input id="inicio" type="date"></label>
+        <label>Fin del periodo de gastos<input id="fin" type="date"></label>
+        <label>Último día del plazo de justificación<input id="finjust" type="date"></label>
+      </div>
+      <label class="check"><input id="ivadeducible" type="checkbox"><span>La entidad <strong>deduce el IVA</strong>. Si no lo sabes, deja la casilla sin marcar: la mayoría de asociaciones no lo deducen.</span></label>
+    </fieldset>
+
+    <fieldset class="step">
+      <legend><span class="step-n" aria-hidden="true">3</span>Relación de gastos</legend>
+      <p class="hint">Sube un CSV o un Excel, o copia la tabla en Excel y pégala aquí. Columnas reconocidas: Nº, Concepto, Tipo, Acreedor, NIF, Nº factura, Fecha emisión, Fecha pago, Medio de pago, Importe (total con IVA), IVA, % imputado y Fuente.</p>
+      <div class="row">
+        <label class="button secondary file-button">Subir archivo<input id="file" type="file" accept=".csv,.txt,.xlsx,.xls"></label>
+        <button id="example" type="button" class="secondary">Cargar ejemplo</button>
+        <a class="button secondary" href="ejemplo_relacion_gastos.csv" download>Descargar plantilla</a>
+        <span id="file-name" class="hint" aria-live="polite"></span>
+      </div>
+      <label class="sr-only" for="data">Relación de gastos</label>
+      <textarea id="data" rows="8" spellcheck="false" placeholder="Pega aquí tu tabla…"></textarea>
+      <details class="hint"><summary>Valores de la columna «Tipo»</summary><div id="types-help"></div></details>
+      <button id="run" type="submit" class="primary">Comprobar la relación</button>
+    </fieldset>
+  </form>
+
+  <section id="results" class="results" hidden aria-labelledby="results-title" tabindex="-1">
+    <h2 id="results-title">Resultado</h2>
+    <div id="summary" class="summary" role="status"></div>
+    <dl id="totals" class="totals"></dl>
+    <ol id="findings" class="findings"></ol>
+    <h3>Lo que tienes que presentar</h3>
+    <ul id="checklist" class="checklist"></ul>
+    <button id="export" type="button" class="secondary">Descargar la relación ordenada (CSV)</button>
+    
+  </section>
+
+  <section class="guides" aria-labelledby="guides-title"><h2 id="guides-title">Guías por convocatoria</h2><ul><li><a href="guias/cuenta-justificativa-simplificada/">Cómo hacer la cuenta justificativa simplificada de una subvención</a></li><li><a href="guias/ayuntamiento-madrid-subvenciones-deportivas/">Justificar la subvención deportiva del Ayuntamiento de Madrid 2025-2026</a></li><li><a href="guias/diputacio-barcelona-cultura-popular/">Justificar la subvención de cultura popular de la Diputació de Barcelona 2026</a></li><li><a href="guias/diputacio-tarragona-activitats-culturals/">Justificar la subvención de actividades culturales singulares de la Diputació de Tarragona</a></li><li><a href="guias/xunta-clubes-deportivos-pr945c/">Justificar la ayuda de la Xunta a clubes deportivos (PR945C)</a></li></ul></section>
+</main>
+<script type="module" src="src/app.js"></script>
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Herramienta orientativa: comprueba reglas generales y las de las bases citadas. <strong>No sustituye a las bases de tu convocatoria ni a la revisión del órgano concedente</strong>, y no es asesoramiento jurídico ni fiscal. Si un resultado no te cuadra, mandan las bases.</p>
+    <p class="meta">Reglas revisadas el 16/10/2026. Código en <a href="https://github.com/JorgePs135/comprobador-subvenciones">GitHub</a>.</p>
+  </div>
+</footer>
+</body>
+</html>

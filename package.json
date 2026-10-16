@@ -1,0 +1,10 @@
+{
+  "name": "comprobador-justificacion-subvenciones",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Comprobador local (en el navegador) de la relación clasificada de gastos de una subvención.",
+  "scripts": {
+    "test": "node --test"
+  }
+}

@@ -1,0 +1,8 @@
+Nº;Concepto;Tipo;Acreedor;NIF;Nº factura;Fecha emisión;Fecha pago;Medio de pago;Importe;IVA;% imputado;Fuente
+1;Licencias federativas temporada;inscripcion;Federación de Ejemplo;G1234567D;L-2026-01;15/09/2025;20/09/2025;transferencia;1.250,00;0;100;Ayuntamiento
+2;Arbitrajes octubre;directo;Comité de Árbitros;G1234567D;A-118;31/10/2025;05/11/2025;transferencia;420,00;0;100;Ayuntamiento
+3;Autobús desplazamiento;directo;Autocares Ejemplo SL;B12345674;F-552;12/11/2025;12/11/2025;efectivo;650,00;59,09;100;Ayuntamiento
+4;Equipaciones;directo;Deportes Ejemplo SL;B12345674;F-990;03/12/2025;10/12/2025;tarjeta;1.089,00;189,00;100;Ayuntamiento
+5;Gestoría;indirecto;Asesoría Ejemplo SL;B12345674;G-07;15/01/2026;15/01/2026;transferencia;484,00;84,00;100;Fondos propios
+6;Botiquín;directo;Farmacia Ejemplo;12345678Z;T-33;20/02/2026;20/02/2026;tarjeta;85,50;7,77;100;Ayuntamiento
+7;Equipaciones;directo;Deportes Ejemplo SL;B12345674;F-990;03/12/2025;10/12/2025;tarjeta;1.089,00;189,00;100;Ayuntamiento

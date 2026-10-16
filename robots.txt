@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://jorgeps135.github.io/comprobador-subvenciones/sitemap.xml
