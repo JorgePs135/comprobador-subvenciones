@@ -236,6 +236,7 @@ function guidePage(id, lang) {
     <h2>${esc(t.guide.fuente)}</h2>
     <p>${esc(t.guide.ref)}: ${esc(p.edicion)}. <a href="${esc(p.fuente)}" rel="noopener">${esc(p.fuente.replace(/^https:\/\//, '').slice(0, 60))}${svg('external')}</a></p>
     <p class="cta"><a class="button primary" href="${base}${t.toolPath}?perfil=${p.slug}">${esc(t.guide.cta)}${svg('arrow')}</a></p>
+    ${SITE.waitlist ? `<p class="waitlist">${t.waitlist.replace('{url}', esc(SITE.waitlist))}</p>` : ''}
   </article>
 </main>`;
   return layout({ lang, path, title: g.title, description: g.description, alternates: alternatesFor('guide', id), body, mode: 'read' });
