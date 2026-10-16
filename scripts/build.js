@@ -109,8 +109,8 @@ ${hreflang}
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:url" content="${SITE.url}/${path}">
 <meta name="color-scheme" content="light dark">
-${path === '' && SITE.googleVerification ? `<meta name="google-site-verification" content="${esc(SITE.googleVerification)}">
-` : ''}
+${path === '' ? (SITE.googleVerification ?? []).map((v) => `<meta name="google-site-verification" content="${esc(v)}">
+`).join('') : ''}
 <link rel="icon" href="${base}favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="${base}style.css">
 </head>
