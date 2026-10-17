@@ -18,21 +18,34 @@
 <meta name="google-site-verification" content="sUl2-nAL3TPNGuzJBS6ejAyVLkczumSACGYL5AypqqQ">
 <meta name="google-site-verification" content="yz7EzKKru-EQoIACVPVY4UyGGm5D6PhJxTglk_7Hu4c">
 
+<meta name="theme-color" content="#f3efe6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#161412" media="(prefers-color-scheme: dark)">
+<link rel="preload" href="fonts/publicsans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/literata-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="style.css">
 </head>
 <body class="operate">
 <header class="site-header">
   <div class="wrap bar">
-    <a class="brand" href="./"><svg class="icon brand-mark" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 19 6v5c0 4.5-3 8.4-7 10-4-1.6-7-5.5-7-10V6l7-3Z"/><path d="m9 12 2 2 4-4"/></svg><span>Comprobador de justificación de subvenciones</span></a>
+    <a class="brand" href="./"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="16" r="10" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="2 2.2"/><path d="m11 16.4 3.4 3.3L21.5 12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Comprobador</strong> de subvenciones</span></a>
     <a class="lang" href="ca/" hreflang="ca" lang="ca" title="Versió en català">Català</a>
   </div>
 </header>
 <main class="wrap tool" data-base="">
   <section class="intro">
-    <h1>Comprobador de justificación de subvenciones para asociaciones y clubes</h1>
-    <p class="lead">Para asociaciones y clubes que justifican una subvención con <strong>cuenta justificativa simplificada</strong>. Revisa la relación de gastos antes de presentarla y descubre lo que falta.</p>
-    <p class="privacy"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 19 6v5c0 4.5-3 8.4-7 10-4-1.6-7-5.5-7-10V6l7-3Z"/><path d="m9 12 2 2 4-4"/></svg><span>Todo se procesa en tu navegador: ningún dato sale de tu ordenador.</span></p>
+    <div class="intro-text">
+      <h1>Comprobador de justificación de subvenciones para asociaciones y clubes</h1>
+      <p class="lead">Para asociaciones y clubes que justifican una subvención con <strong>cuenta justificativa simplificada</strong>. Revisa la relación de gastos antes de presentarla y descubre lo que falta.</p>
+      <p class="privacy"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="1.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>Todo se procesa en tu navegador: ningún dato sale de tu ordenador.</span></p>
+    </div>
+    <figure class="specimen" aria-label="Ejemplo de relación de gastos revisada">
+      <table>
+        <thead><tr><th>Nº</th><th>Concepto</th><th>Pago</th><th class="num">Importe</th></tr></thead>
+        <tbody><tr><td>1</td><td>Licencias federativas</td><td>Transferencia</td><td class="num">1.250,00</td></tr><tr><td>2</td><td>Arbitrajes octubre</td><td>Transferencia</td><td class="num">420,00</td></tr><tr class="flag"><td>3</td><td>Autobús desplazamiento</td><td>Efectivo</td><td class="num">650,00</td></tr><tr><td>4</td><td>Equipaciones</td><td>Tarjeta</td><td class="num">1.089,00</td></tr></tbody>
+      </table>
+      <figcaption><span class="mark">!</span>Fila 3: efectivo por encima de 600 €. Ayto. de Madrid, punto vigesimosegundo.</figcaption>
+    </figure>
   </section>
 
   <form id="form" class="steps" novalidate>
@@ -73,8 +86,13 @@
   </form>
 
   <section id="results" class="results" hidden aria-labelledby="results-title" tabindex="-1">
-    <h2 id="results-title">Resultado</h2>
-    <div id="summary" class="summary" role="status"></div>
+    <div class="results-head">
+      <div>
+        <h2 id="results-title">Resultado</h2>
+        <div id="summary" class="summary" role="status"></div>
+      </div>
+      <div id="stamp" class="stamp" aria-hidden="true"></div>
+    </div>
     <dl id="totals" class="totals"></dl>
     <ol id="findings" class="findings"></ol>
     <h3>Lo que tienes que presentar</h3>

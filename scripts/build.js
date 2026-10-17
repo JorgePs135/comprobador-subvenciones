@@ -13,6 +13,7 @@ const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<
 
 const ICON = {
   shield: '<path d="M12 3 19 6v5c0 4.5-3 8.4-7 10-4-1.6-7-5.5-7-10V6l7-3Z"/><path d="m9 12 2 2 4-4"/>',
+  lock: '<rect x="5" y="11" width="14" height="9" rx="1.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
   external: '<path d="M7 17 17 7"/><path d="M9 7h8v8"/>',
   arrow: '<path d="M5 12h14"/><path d="m13 6 6 6-6 6"/>',
 };
@@ -24,6 +25,13 @@ const T = {
     htmlLang: 'es', locale: 'es_ES',
     toolPath: '', guidePath: (slug) => `guias/${slug}/`,
     brand: 'Comprobador de justificación de subvenciones',
+    brandHtml: '<strong>Comprobador</strong> de subvenciones',
+    spec: {
+      label: 'Ejemplo de relación de gastos revisada',
+      head: ['Nº', 'Concepto', 'Pago', 'Importe'],
+      rows: [['1', 'Licencias federativas', 'Transferencia', '1.250,00'], ['2', 'Arbitrajes octubre', 'Transferencia', '420,00'], ['3', 'Autobús desplazamiento', 'Efectivo', '650,00'], ['4', 'Equipaciones', 'Tarjeta', '1.089,00']],
+      note: 'Fila 3: efectivo por encima de 600 €. Ayto. de Madrid, punto vigesimosegundo.',
+    },
     toolTitle: 'Comprobador de justificación de subvenciones para asociaciones y clubes',
     toolDescription: 'Revisa la relación clasificada de gastos de la subvención de tu asociación o club antes de presentarla: fechas, pagos, efectivo, indirectos, duplicados y documentos que faltan. Gratis y sin enviar tus datos.',
     lead: 'Para asociaciones y clubes que justifican una subvención con <strong>cuenta justificativa simplificada</strong>. Revisa la relación de gastos antes de presentarla y descubre lo que falta.',
@@ -50,6 +58,13 @@ const T = {
     htmlLang: 'ca', locale: 'ca_ES',
     toolPath: 'ca/', guidePath: (slug) => `ca/guies/${slug}/`,
     brand: 'Comprovador de justificació de subvencions',
+    brandHtml: '<strong>Comprovador</strong> de subvencions',
+    spec: {
+      label: 'Exemple de relació de despeses revisada',
+      head: ['Núm.', 'Concepte', 'Pagament', 'Import'],
+      rows: [['1', 'Músics de la cobla', 'Transferència', '4.500,00'], ['2', 'Lloguer d’equip de so', 'Transferència', '820,00'], ['3', 'Llum del local', 'Domiciliació', '1.000,00'], ['4', 'Cartells i difusió', 'Targeta', '310,00']],
+      note: "Fila 3: les despeses indirectes superen el 5 % del cost total. Diputació de Barcelona, art. 16.1.",
+    },
     toolTitle: 'Comprovador de justificació de subvencions per a associacions i clubs',
     toolDescription: "Revisa la relació classificada de despeses de la subvenció de la teva entitat abans de presentar-la: dates, pagaments, efectiu, indirectes, duplicats i documents que falten. Gratuït i sense enviar les teves dades.",
     lead: 'Per a associacions i clubs que justifiquen una subvenció amb <strong>compte justificatiu simplificat</strong>. Revisa la relació de despeses abans de presentar-la i descobreix què hi falta.',
@@ -111,13 +126,17 @@ ${hreflang}
 <meta name="color-scheme" content="light dark">
 ${path === '' ? (SITE.googleVerification ?? []).map((v) => `<meta name="google-site-verification" content="${esc(v)}">
 `).join('') : ''}
+<meta name="theme-color" content="#f3efe6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#161412" media="(prefers-color-scheme: dark)">
+<link rel="preload" href="${base}fonts/publicsans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="${base}fonts/literata-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="${base}favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="${base}style.css">
 </head>
 <body class="${mode}">
 <header class="site-header">
   <div class="wrap bar">
-    <a class="brand" href="${(base + t.toolPath) || './'}">${svg('shield', 'icon brand-mark')}<span>${esc(t.brand)}</span></a>
+    <a class="brand" href="${(base + t.toolPath) || './'}">${STAMP_MARK}<span>${t.brandHtml}</span></a>
     ${otherPath != null ? `<a class="lang" href="${base}${otherPath}" hreflang="${otherLang}" lang="${otherLang}" title="${esc(t.other.title)}">${esc(t.other.label)}</a>` : ''}
   </div>
 </header>
@@ -143,14 +162,32 @@ function guideLinks(lang) {
   return `<section class="guides" aria-labelledby="guides-title"><h2 id="guides-title">${esc(t.guidesTitle)}</h2><ul>${items.join('')}</ul></section>`;
 }
 
+const STAMP_MARK = `<svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="16" r="10" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="2 2.2"/><path d="m11 16.4 3.4 3.3L21.5 12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+/** Fragmento de una relación de gastos con un error anotado: explica la herramienta sin palabras de más. */
+function specimen(lang) {
+  const t = T[lang].spec;
+  const rows = t.rows.map((r, i) => `<tr${i === 2 ? ' class="flag"' : ''}><td>${r[0]}</td><td>${esc(r[1])}</td><td>${esc(r[2])}</td><td class="num">${r[3]}</td></tr>`).join('');
+  return `<figure class="specimen" aria-label="${esc(t.label)}">
+      <table>
+        <thead><tr><th>${t.head[0]}</th><th>${t.head[1]}</th><th>${t.head[2]}</th><th class="num">${t.head[3]}</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+      <figcaption><span class="mark">!</span>${esc(t.note)}</figcaption>
+    </figure>`;
+}
+
 function toolPage(lang) {
   const t = T[lang];
   const base = '../'.repeat(t.toolPath.split('/').filter(Boolean).length);
   const body = `<main class="wrap tool" data-base="${base}">
   <section class="intro">
-    <h1>${esc(t.toolTitle)}</h1>
-    <p class="lead">${t.lead}</p>
-    <p class="privacy">${svg('shield')}<span>${esc(t.privacy)}</span></p>
+    <div class="intro-text">
+      <h1>${esc(t.toolTitle)}</h1>
+      <p class="lead">${t.lead}</p>
+      <p class="privacy">${svg('lock')}<span>${esc(t.privacy)}</span></p>
+    </div>
+    ${specimen(lang)}
   </section>
 
   <form id="form" class="steps" novalidate>
@@ -191,8 +228,13 @@ function toolPage(lang) {
   </form>
 
   <section id="results" class="results" hidden aria-labelledby="results-title" tabindex="-1">
-    <h2 id="results-title">${esc(t.results)}</h2>
-    <div id="summary" class="summary" role="status"></div>
+    <div class="results-head">
+      <div>
+        <h2 id="results-title">${esc(t.results)}</h2>
+        <div id="summary" class="summary" role="status"></div>
+      </div>
+      <div id="stamp" class="stamp" aria-hidden="true"></div>
+    </div>
     <dl id="totals" class="totals"></dl>
     <ol id="findings" class="findings"></ol>
     <h3>${esc(t.checklistTitle)}</h3>

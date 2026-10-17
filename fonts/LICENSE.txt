@@ -1,0 +1,3 @@
+Literata (Copyright 2017 The Literata Project Authors) y Public Sans (Copyright 2015 The Public Sans Project Authors)
+se distribuyen bajo la SIL Open Font License 1.1: https://openfontlicense.org
+Ficheros obtenidos de Google Fonts (subconjuntos latin y latin-ext).

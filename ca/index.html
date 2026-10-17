@@ -16,21 +16,34 @@
 <meta property="og:url" content="https://jorgeps135.github.io/comprobador-subvenciones/ca/">
 <meta name="color-scheme" content="light dark">
 
+<meta name="theme-color" content="#f3efe6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#161412" media="(prefers-color-scheme: dark)">
+<link rel="preload" href="../fonts/publicsans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/literata-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../style.css">
 </head>
 <body class="operate">
 <header class="site-header">
   <div class="wrap bar">
-    <a class="brand" href="../ca/"><svg class="icon brand-mark" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 19 6v5c0 4.5-3 8.4-7 10-4-1.6-7-5.5-7-10V6l7-3Z"/><path d="m9 12 2 2 4-4"/></svg><span>Comprovador de justificació de subvencions</span></a>
+    <a class="brand" href="../ca/"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="16" r="10" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="2 2.2"/><path d="m11 16.4 3.4 3.3L21.5 12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Comprovador</strong> de subvencions</span></a>
     <a class="lang" href="../" hreflang="es" lang="es" title="Versión en castellano">Castellano</a>
   </div>
 </header>
 <main class="wrap tool" data-base="../">
   <section class="intro">
-    <h1>Comprovador de justificació de subvencions per a associacions i clubs</h1>
-    <p class="lead">Per a associacions i clubs que justifiquen una subvenció amb <strong>compte justificatiu simplificat</strong>. Revisa la relació de despeses abans de presentar-la i descobreix què hi falta.</p>
-    <p class="privacy"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 19 6v5c0 4.5-3 8.4-7 10-4-1.6-7-5.5-7-10V6l7-3Z"/><path d="m9 12 2 2 4-4"/></svg><span>Tot es processa al teu navegador: cap dada no surt del teu ordinador.</span></p>
+    <div class="intro-text">
+      <h1>Comprovador de justificació de subvencions per a associacions i clubs</h1>
+      <p class="lead">Per a associacions i clubs que justifiquen una subvenció amb <strong>compte justificatiu simplificat</strong>. Revisa la relació de despeses abans de presentar-la i descobreix què hi falta.</p>
+      <p class="privacy"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="1.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>Tot es processa al teu navegador: cap dada no surt del teu ordinador.</span></p>
+    </div>
+    <figure class="specimen" aria-label="Exemple de relació de despeses revisada">
+      <table>
+        <thead><tr><th>Núm.</th><th>Concepte</th><th>Pagament</th><th class="num">Import</th></tr></thead>
+        <tbody><tr><td>1</td><td>Músics de la cobla</td><td>Transferència</td><td class="num">4.500,00</td></tr><tr><td>2</td><td>Lloguer d’equip de so</td><td>Transferència</td><td class="num">820,00</td></tr><tr class="flag"><td>3</td><td>Llum del local</td><td>Domiciliació</td><td class="num">1.000,00</td></tr><tr><td>4</td><td>Cartells i difusió</td><td>Targeta</td><td class="num">310,00</td></tr></tbody>
+      </table>
+      <figcaption><span class="mark">!</span>Fila 3: les despeses indirectes superen el 5 % del cost total. Diputació de Barcelona, art. 16.1.</figcaption>
+    </figure>
   </section>
 
   <form id="form" class="steps" novalidate>
@@ -71,8 +84,13 @@
   </form>
 
   <section id="results" class="results" hidden aria-labelledby="results-title" tabindex="-1">
-    <h2 id="results-title">Resultat</h2>
-    <div id="summary" class="summary" role="status"></div>
+    <div class="results-head">
+      <div>
+        <h2 id="results-title">Resultat</h2>
+        <div id="summary" class="summary" role="status"></div>
+      </div>
+      <div id="stamp" class="stamp" aria-hidden="true"></div>
+    </div>
     <dl id="totals" class="totals"></dl>
     <ol id="findings" class="findings"></ol>
     <h3>El que has de presentar</h3>

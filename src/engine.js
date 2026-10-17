@@ -137,7 +137,7 @@ export function normalizeRows(rows) {
 }
 
 const round2 = (n) => Math.round(n * 100) / 100;
-export const fmt = (n) => (n ?? 0).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: 'always' }) + ' €';
+export const fmt = (n) => (n ?? 0).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: 'always' }) + ' €';
 const isCash = (medio) => /efectivo|metalico|caja|contado/.test(medio);
 
 /** Importe que se imputa a la subvención: sin IVA si la entidad lo deduce. */

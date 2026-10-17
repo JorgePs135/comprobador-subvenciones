@@ -1,7 +1,7 @@
 // Perfiles: solo datos. Cada regla sale de un artículo de las bases citado en `cite`.
 // Al publicarse una edición nueva hay que revisar las bases y actualizar `edicion`, `periodo` y lo que cambie.
 
-const LEY_EFECTIVO = 'Ley 7/2012, art. 7 (redacción de la Ley 11/2021): no se puede pagar en efectivo 1.000 € o más si una de las partes es empresario o profesional.';
+const LEY_EFECTIVO = 'Ley 7/2012, art. 7 (redacción de la Ley 11/2021): no se puede pagar en efectivo 1.000 € o más si una de las partes es empresario o profesional.';
 
 const GENERIC_CITE = {
   MINIMO: 'Si se justifica menos de lo concedido, la ayuda se reduce (art. 37 LGS y bases de cada convocatoria).',
@@ -57,21 +57,21 @@ export const PROFILES = {
       ...GENERIC_CITE,
       PERIODO: 'Punto sexto 1.h: gastos realizados y pagados desde el 01-09-2025. Se admiten inscripciones federativas anteriores si son de la temporada 2025-26 (por eso, con tipo "inscripcion" es un aviso).',
       PAGO_TARDE: 'Punto sexto 1.d y 1.h: pagados hasta el día anterior al fin del plazo de justificación.',
-      EFECTIVO: 'Punto vigesimosegundo: efectivo solo en facturas de menos de 600 €, con factura o recibí firmado.',
+      EFECTIVO: 'Punto vigesimosegundo: efectivo solo en facturas de menos de 600 €, con factura o recibí firmado.',
       EXCLUIDO: 'Punto sexto 1.b: no se admiten bienes inventariables (vida útil de más de 12 meses).',
-      INDIRECTOS: 'Punto sexto 1.j: los costes indirectos no pueden superar el 8 % de la subvención concedida.',
-      TRES_OFERTAS: 'Punto sexto 1.g: tres ofertas cuando un proveedor llega a 15.000 € de base imponible.',
+      INDIRECTOS: 'Punto sexto 1.j: los costes indirectos no pueden superar el 8 % de la subvención concedida.',
+      TRES_OFERTAS: 'Punto sexto 1.g: tres ofertas cuando un proveedor llega a 15.000 € de base imponible.',
       NIF: 'Punto vigesimosegundo 1.b: identificación del acreedor con nombre y NIF.',
       SOBREFINANCIACION: 'Punto sexto 1.e y certificado del punto vigesimosegundo 1.c.',
     },
     checklist: [
       'Una única memoria de actuación (líneas A y/o B) con las condiciones y los resultados.',
       'Relación numerada y clasificada de gastos (nombre y NIF del acreedor, importe, fechas) del 01-09-2025 al 31-08-2026, con la fuente de financiación y su % en cada gasto.',
-      'Certificado de destino íntegro y de que la ayuda más otros ingresos no supera el 100 % del coste.',
+      'Certificado de destino íntegro y de que la ayuda más otros ingresos no supera el 100 % del coste.',
       'Certificado de difusión de la financiación municipal (medios utilizados).',
       'Documentación de los rendimientos financieros generados por los fondos, si los hay.',
       'Publicidad de la subvención según la Ley 19/2013, si os aplica (art. 3.b).',
-      'Justificantes de pago: resguardo de transferencia, extracto del cheque o recibí si se pagó en efectivo (< 600 €).',
+      'Justificantes de pago: resguardo de transferencia, extracto del cheque o recibí si se pagó en efectivo (< 600 €).',
     ],
   },
 
@@ -95,9 +95,9 @@ export const PROFILES = {
       ...GENERIC_CITE,
       PERIODO: 'Art. 16.2: facturas y recibos de gastos del 01-01-2026 al 31-12-2026.',
       PAGO_TARDE: 'Arts. 16.2 y 20.4: pagado antes de que acabe el periodo de justificación.',
-      INDIRECTOS: 'Art. 16.1: los gastos indirectos no pueden superar el 5 % del coste total de la actividad.',
-      PERSONAL: 'Art. 16.1: se considera subvencionable un máximo del 10 % de los gastos del personal administrativo, técnico y de producción. Revisa cómo lo aplica la Diputació.',
-      DESVIACION: 'Art. 20.6: se admiten desviaciones motivadas de hasta el 30 % del presupuesto.',
+      INDIRECTOS: 'Art. 16.1: los gastos indirectos no pueden superar el 5 % del coste total de la actividad.',
+      PERSONAL: 'Art. 16.1: se considera subvencionable un máximo del 10 % de los gastos del personal administrativo, técnico y de producción. Revisa cómo lo aplica la Diputació.',
+      DESVIACION: 'Art. 20.6: se admiten desviaciones motivadas de hasta el 30 % del presupuesto.',
       MINIMO: 'Art. 20.2.b: hay que justificar el coste total de la actividad e indicar cómo se ha financiado.',
       IVA: 'Art. 16.1: el IVA solo es subvencionable si no se puede deducir.',
     },
@@ -105,7 +105,7 @@ export const PROFILES = {
       'Modelo normalizado de diba.cat/web/cultura/subvencions, que se presenta en la sede electrónica.',
       'Memoria de actuación (actividades, resultados y desviaciones respecto al presupuesto).',
       'Memoria económica: relación clasificada con concepto, acreedor, importe, fecha de emisión, fecha de pago y % imputado; coste total y su financiación.',
-      'Si la concesión supera 3.000 €: muestra de las facturas imputadas a la Diputació.',
+      'Si la concesión supera 3.000 €: muestra de las facturas imputadas a la Diputació.',
       'Material gráfico o digital donde conste la colaboración de la Diputació (art. 26).',
       'Declaraciones responsables del formulario (justificantes no usados en otra subvención, sin IVA deducible, financiación ≤ coste…).',
     ],
@@ -176,13 +176,13 @@ export const PROFILES = {
       'Anexo X: memoria de actuación (competiciones, resultados, entrenadores).',
       'Anexo XI: relación clasificada (nº, referencia, concepto, nº de documento, fecha de emisión, fecha de pago, acreedor, NIF, importe).',
       'Seguros: solo si no los ha financiado otra ayuda.',
-      'Facturas de menos de 1.000 €: vale el justificante de recepción del proveedor (art. 15.4).',
+      'Facturas de menos de 1.000 €: vale el justificante de recepción del proveedor (art. 15.4).',
     ],
   },
 };
 
 // Traducciones al catalán (perfil.ca sobrescribe nombre, nota, cite y checklist). Pendientes de revisión nativa.
-const LLEI_EFECTIU = "Llei 7/2012, art. 7 (redacció de la Llei 11/2021): no es pot pagar en efectiu 1.000 € o més si una de les parts és empresari o professional.";
+const LLEI_EFECTIU = "Llei 7/2012, art. 7 (redacció de la Llei 11/2021): no es pot pagar en efectiu 1.000 € o més si una de les parts és empresari o professional.";
 const GENERIC_CITE_CA = {
   MINIMO: "Si es justifica menys del que s'ha concedit, l'ajut es redueix (art. 37 LGS i bases de cada convocatòria).",
   PERIODO: "Només són subvencionables les despeses del període d'execució (art. 31.1 LGS).",
@@ -215,9 +215,9 @@ PROFILES.diba_cultura_popular_2026.ca = {
     ...GENERIC_CITE_CA,
     PERIODO: "Art. 16.2: factures i rebuts de despeses de l'01-01-2026 al 31-12-2026.",
     PAGO_TARDE: 'Arts. 16.2 i 20.4: pagat abans que acabi el període de justificació.',
-    INDIRECTOS: "Art. 16.1: les despeses indirectes no poden superar el 5 % del cost total de l'activitat.",
-    PERSONAL: "Art. 16.1: es considera subvencionable un màxim del 10 % de les despeses de personal administratiu, tècnic i de producció. Revisa com ho aplica la Diputació.",
-    DESVIACION: 'Art. 20.6: s\'admeten desviacions motivades de fins al 30 % del pressupost.',
+    INDIRECTOS: "Art. 16.1: les despeses indirectes no poden superar el 5 % del cost total de l'activitat.",
+    PERSONAL: "Art. 16.1: es considera subvencionable un màxim del 10 % de les despeses de personal administratiu, tècnic i de producció. Revisa com ho aplica la Diputació.",
+    DESVIACION: 'Art. 20.6: s\'admeten desviacions motivades de fins al 30 % del pressupost.',
     MINIMO: "Art. 20.2.b: cal justificar el cost total de l'activitat i indicar com s'ha finançat.",
     IVA: "Art. 16.1: l'IVA només és subvencionable si no es pot deduir.",
   },
@@ -225,7 +225,7 @@ PROFILES.diba_cultura_popular_2026.ca = {
     'Model normalitzat de diba.cat/web/cultura/subvencions, que es presenta a la seu electrònica.',
     "Memòria d'actuació (activitats, resultats i desviacions respecte al pressupost).",
     "Memòria econòmica: relació classificada amb concepte, creditor, import, data d'emissió, data de pagament i % imputat; cost total i com s'ha finançat.",
-    'Si la concessió supera 3.000 €: mostra de les factures imputades a la Diputació.',
+    'Si la concessió supera 3.000 €: mostra de les factures imputades a la Diputació.',
     'Material gràfic o digital on consti la col·laboració de la Diputació (art. 26).',
     "Declaracions responsables del formulari (justificants no fets servir en una altra subvenció, sense IVA deduïble, finançament ≤ cost…).",
   ],

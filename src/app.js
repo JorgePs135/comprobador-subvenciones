@@ -19,6 +19,19 @@ const ICONS = {
 const icon = (name) => `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">${ICONS[name]}</svg>`;
 let last = { expenses: [], ctx: {} };
 
+/** Sello de goma circular con el texto alrededor. */
+function stampSvg(ring, ok) {
+  const center = ok
+    ? '<path d="m44 61 11 11 22-25" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>'
+    : '<path d="M60 43v18" stroke="currentColor" stroke-width="7" stroke-linecap="round"/><circle cx="60" cy="75" r="4.2" fill="currentColor"/>';
+  const id = `ring${Math.random().toString(36).slice(2, 8)}`;
+  return `<svg viewBox="0 0 120 120"><defs><path id="${id}" d="M60 60m-44 0a44 44 0 1 1 88 0a44 44 0 1 1 -88 0"/></defs>`
+    + '<circle cx="60" cy="60" r="56" fill="none" stroke="currentColor" stroke-width="3"/>'
+    + '<circle cx="60" cy="60" r="33" fill="none" stroke="currentColor" stroke-width="1.5"/>'
+    + `<text font-size="10" font-weight="700" fill="currentColor"><textPath href="#${id}" textLength="272" lengthAdjust="spacing">${esc(ring)} · ${esc(ring)} ·</textPath></text>`
+    + `${center}</svg>`;
+}
+
 for (const p of Object.values(PROFILES)) $('profile').add(new Option(profileField(p, 'nombre', lang), p.id));
 const wanted = new URLSearchParams(location.search).get('perfil');
 const preset = Object.values(PROFILES).find((p) => p.slug === wanted || p.id === wanted);
@@ -103,15 +116,26 @@ function render(profile, findings, totals, ctx) {
   const T = ui.totales;
   const cells = [[T.n, totals.n], [T.facturas, fmt(totals.totalFacturas)], [T.coste, fmt(totals.costeTotal)], [T.imputado, fmt(totals.total)],
     [T.indirectos, fmt(totals.indirectos)], [T.personal, fmt(totals.personal)]];
-  if (ctx.subvencion) cells.push([T.cubierto, `${(totals.total / ctx.subvencion * 100).toLocaleString(lang === 'ca' ? 'ca-ES' : 'es-ES', { maximumFractionDigits: 1 })} %`]);
+  if (ctx.subvencion) cells.push([T.cubierto, `${(totals.total / ctx.subvencion * 100).toLocaleString(lang === 'ca' ? 'ca-ES' : 'es-ES', { maximumFractionDigits: 1 })} %`]);
   $('totals').innerHTML = cells.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('');
   const order = { error: 0, aviso: 1, info: 2 };
+  // El texto empieza por «Fila N (nº X): …»; esa referencia pasa a la columna izquierda, como en un libro de cuentas.
+  const PREFIX = /^(Fila \d+) \((nº|núm\.) ([^)]*)\): /;
   $('findings').innerHTML = [...findings].sort((x, y) => order[x.level] - order[y.level] || (x.row ?? 0) - (y.row ?? 0))
-    .map((f) => {
+    .map((f, n) => {
       const cite = cites[f.code];
-      return `<li class="finding ${f.level}">${icon(f.level)}<div><span class="lvl">${esc(ui.niveles[f.level])}</span> ${esc(findingText(f, lang))}`
-        + `${cite ? `<span class="cite">${esc(cite)}</span>` : ''}</div></li>`;
+      let text = findingText(f, lang);
+      let ref = ui.general;
+      const m = text.match(PREFIX);
+      if (m) { ref = `${m[1]}<small>${m[2]} ${esc(m[3])}</small>`; text = text.slice(m[0].length); }
+      return `<li class="finding ${f.level}" style="--i:${Math.min(n, 12)}"><span class="ref">${ref}</span>`
+        + `<div><span class="lvl">${icon(f.level)}${esc(ui.niveles[f.level])}</span><p>${esc(text)}</p>`
+        + `${cite ? `<p class="cite">${esc(cite)}</p>` : ''}</div></li>`;
     }).join('');
+  const [stampLevel, stampText] = e ? ['error', ui.sello.revisar(ui.count(e, ...ui.errores))]
+    : a ? ['aviso', ui.sello.revisar(ui.count(a, ...ui.avisos))] : ['ok', ui.sello.ok];
+  $('stamp').className = `stamp ${stampLevel}`;
+  $('stamp').innerHTML = stampSvg(stampText.toUpperCase(), stampLevel === 'ok');
   $('checklist').innerHTML = profileField(profile, 'checklist', lang)
     .map((c, n) => `<li><label><input type="checkbox" id="ck${n}"><span>${esc(c)}</span></label></li>`).join('');
   $('results').hidden = false;
